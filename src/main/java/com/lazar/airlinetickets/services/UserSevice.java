@@ -16,4 +16,6 @@ public class UserSevice {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+    public User getUserById(Long id){ return  userRepository.findUserById(id);}
 }

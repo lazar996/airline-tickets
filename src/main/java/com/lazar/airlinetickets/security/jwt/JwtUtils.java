@@ -18,7 +18,7 @@ public class JwtUtils {
   @Value("myXAuthSecret")
   private String jwtSecret;
 
-  @Value("18000")
+  @Value("818000")
   private int jwtExpirationMs;
 
   public String generateJwtToken(Authentication authentication) {
