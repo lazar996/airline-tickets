@@ -13,7 +13,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/api/public")
+@RequestMapping("/api")
 public class UserController {
 
 
@@ -32,11 +32,13 @@ public class UserController {
     return new ResponseEntity<List<User>>(this.userSevice.getAllUsers(), HttpStatus.OK);
   }
   @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
-  @RequestMapping(value = "api/user/{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+  @RequestMapping(value = "/user/{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long id) {
 
     return new ResponseEntity<User>(this.userSevice.getUserById(id),HttpStatus.OK);
   }
+
+
 
 
 }
