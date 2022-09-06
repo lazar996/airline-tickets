@@ -1,5 +1,6 @@
 package com.lazar.airlinetickets.controller;
 
+import com.lazar.airlinetickets.DTO.UserDTO;
 import com.lazar.airlinetickets.model.User;
 import com.lazar.airlinetickets.services.UserSevice;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class UserController {
 
 
   @Autowired
-  UserSevice userSevice;
+  UserSevice userService;
 
 
  @GetMapping("/all")
@@ -29,13 +30,24 @@ public class UserController {
   @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
   public ResponseEntity<?> getAllUser() {
 
-    return new ResponseEntity<List<User>>(this.userSevice.getAllUsers(), HttpStatus.OK);
+    return new ResponseEntity<List<User>>(this.userService.getAllUsers(), HttpStatus.OK);
   }
-  @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")
+
   @RequestMapping(value = "/user/{id}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long id) {
 
-    return new ResponseEntity<User>(this.userSevice.getUserById(id),HttpStatus.OK);
+    return new ResponseEntity<User>(this.userService.getUserById(id),HttpStatus.OK);
+  }
+
+ @RequestMapping(value = "user/edit/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> editUser(@RequestBody UserDTO userDTO, @PathVariable(value = "id") Long id){
+      if (userDTO.getId()==null){
+          return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+
+      User updateUser = userService.updateUser(userDTO, id);
+      return new ResponseEntity<>(updateUser,HttpStatus.OK);
+
   }
 
 

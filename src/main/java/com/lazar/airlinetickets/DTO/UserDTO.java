@@ -1,59 +1,22 @@
-package com.lazar.airlinetickets.model;
+package com.lazar.airlinetickets.DTO;
 
+import java.io.Serializable;
 
-import org.springframework.beans.factory.annotation.Value;
+public class UserDTO implements Serializable {
 
-import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
-
-@Entity
-@Table(name = "users" ,uniqueConstraints = {
-        @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "email")
-})
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
     private String username;
-
-    @Column(nullable = false)
     private String email;
-
-    @Column(nullable = false)
     private String password;
-
-
-    @Column(name = "first_name",nullable = false)
     private String firstName;
-
-    @Column(name = "last_name",nullable = false)
     private String lastName;
-
-    @Column(nullable = false)
     private String phone;
-
-    @Column(nullable = false)
     private String address;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(  name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
-
-    public User() {
-    }
 
 
-
-
-    public User(String username, String email, String password, String firstName, String lastName, String phone, String address) {
-
+    public UserDTO(Long id, String username, String email, String password, String firstName, String lastName, String phone, String address) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
@@ -61,8 +24,9 @@ public class User {
         this.lastName = lastName;
         this.phone = phone;
         this.address = address;
+    }
 
-
+    public UserDTO() {
     }
 
     public Long getId() {
@@ -97,8 +61,6 @@ public class User {
         this.password = password;
     }
 
-
-
     public String getFirstName() {
         return firstName;
     }
@@ -129,14 +91,5 @@ public class User {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 }

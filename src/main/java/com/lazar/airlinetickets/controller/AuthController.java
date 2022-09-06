@@ -85,11 +85,9 @@ public class AuthController {
             signUpRequest.getUsername(),
             signUpRequest.getEmail(),
             encoder.encode(signUpRequest.getPassword()),
-            signUpRequest.getActive(),
-            signUpRequest.getAge(),
             signUpRequest.getFirstName(),
-            signUpRequest.getPhone(),
             signUpRequest.getLastName(),
+            signUpRequest.getPhone(),
             signUpRequest.getAddress());
 
 
