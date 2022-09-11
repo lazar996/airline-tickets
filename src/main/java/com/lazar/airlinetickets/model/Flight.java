@@ -1,11 +1,8 @@
 package com.lazar.airlinetickets.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -43,6 +40,7 @@ public class Flight {
     @JoinColumn(name = "route_id", referencedColumnName = "id")
     private Route route;
 
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "airport_company_id", referencedColumnName = "id")
     private AirportCompany airportCompany;
@@ -77,6 +75,7 @@ public class Flight {
     public void setCode(String code) {
         this.code = code;
     }
+
 
     public Integer getQuota() {
         return quota;
