@@ -29,9 +29,20 @@ public class FlightService {
         return  flightRepository.findFlightByCode(code);
     }
 
+
+    public List<Flight> getAllFlightsDepartureDateBetweenAndDestination(Date start, Date end, String origin, String destination){
+
+
+            return  flightRepository.getAllFlightsDate(start, end,origin, destination);
+    }
+
     public List<Flight> getAllFlightsDepartureDateBetween(Date start, Date end){
+
+
 
         return flightRepository.getAllByDepartureDateBetween(start, end);
     }
+
+
 
 }
