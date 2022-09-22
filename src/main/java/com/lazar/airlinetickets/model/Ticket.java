@@ -1,6 +1,7 @@
 package com.lazar.airlinetickets.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -11,21 +12,30 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
+    private String CheckIn;
+
+
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
 
-    @JsonBackReference
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id")
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "flight_id", referencedColumnName = "id")
     private Flight flight;
 
     public Ticket() {
     }
 
-    public Ticket(Long id, Passenger passenger, Flight flight) {
+    public Ticket(Long id, String checkIn, Passenger passenger, User user, Flight flight) {
         this.id = id;
+        CheckIn = checkIn;
         this.passenger = passenger;
+        this.user = user;
         this.flight = flight;
     }
 
@@ -37,12 +47,28 @@ public class Ticket {
         this.id = id;
     }
 
+    public String getCheckIn() {
+        return CheckIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        CheckIn = checkIn;
+    }
+
     public Passenger getPassenger() {
         return passenger;
     }
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Flight getFlight() {

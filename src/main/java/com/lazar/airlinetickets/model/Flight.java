@@ -32,7 +32,7 @@ public class Flight {
     @Column(name = "estimated_arrival_date")
     private Date estimatedArrivalDate;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "flight", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
