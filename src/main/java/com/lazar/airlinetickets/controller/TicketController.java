@@ -48,5 +48,17 @@ public class TicketController {
         return new ResponseEntity<Ticket>(this.ticketService.createTicket(ticketDTO),HttpStatus.CREATED);
     }
 
+    @GetMapping("/checkInView")
+    public ResponseEntity<Ticket> viewCart(String email,String lastName, String numberTicket ){
+
+        System.out.println(email+ lastName+ numberTicket);
+        return  new ResponseEntity<Ticket>(this.ticketService.viewCart(email,lastName,numberTicket),HttpStatus.OK);
+    }
+     @PutMapping("/checkIn/{id}")
+    public ResponseEntity<Ticket> checkInTicket(@PathVariable(value = "id") Long id){
+
+        return new ResponseEntity<Ticket>(this.ticketService.checkInTicket(id), HttpStatus.OK);
+    }
+
 
 }

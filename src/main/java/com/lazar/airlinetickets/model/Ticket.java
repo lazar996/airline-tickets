@@ -28,15 +28,19 @@ public class Ticket {
     @JoinColumn(name = "flight_id", referencedColumnName = "id")
     private Flight flight;
 
+    @Column
+    private Long NumberTicket;
+
     public Ticket() {
     }
 
-    public Ticket(Long id, String checkIn, Passenger passenger, User user, Flight flight) {
+    public Ticket(Long id, String checkIn, Passenger passenger, User user, Flight flight, Long numberTicket) {
         this.id = id;
         CheckIn = checkIn;
         this.passenger = passenger;
         this.user = user;
         this.flight = flight;
+        NumberTicket = numberTicket;
     }
 
     public Long getId() {
@@ -77,5 +81,13 @@ public class Ticket {
 
     public void setFlight(Flight flight) {
         this.flight = flight;
+    }
+
+    public Long getNumberTicket() {
+        return NumberTicket;
+    }
+
+    public void setNumberTicket(Long numberTicket) {
+        NumberTicket = numberTicket;
     }
 }

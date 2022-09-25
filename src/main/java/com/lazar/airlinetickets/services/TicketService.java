@@ -4,9 +4,11 @@ import com.lazar.airlinetickets.DTO.TicketDTO;
 import com.lazar.airlinetickets.model.Flight;
 import com.lazar.airlinetickets.model.Passenger;
 import com.lazar.airlinetickets.model.Ticket;
+import com.lazar.airlinetickets.model.User;
 import com.lazar.airlinetickets.repository.FlightRepository;
 import com.lazar.airlinetickets.repository.PassengerRepository;
 import com.lazar.airlinetickets.repository.TicketRepository;
+import com.lazar.airlinetickets.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class TicketService {
     @Autowired
     PassengerRepository passengerRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     public List<Ticket> getAllTicket(){
 
         return ticketRepository.findAll();
@@ -38,11 +43,23 @@ public class TicketService {
 
         Flight flight = flightRepository.findFlightById(ticketDTO.getFlight_id());
         Passenger passenger = passengerRepository.findPassengerById(ticketDTO.getPassenger_id());
+        User user = userRepository.findUserById(ticketDTO.getUser_id());
         Ticket ticket = new Ticket();
         ticket.setCheckIn(ticketDTO.getCheckIn());
         ticket.setFlight(flight);
         ticket.setPassenger(passenger);
+        ticket.setUser(user);
+        System.out.println(flight);
+        return ticketRepository.save(ticket);
+    }
 
+    public Ticket checkInTicket(Long id){
+
+        Ticket ticket = ticketRepository.findTicketById(id);
+
+        System.out.println(ticket);
+
+        ticket.setCheckIn("yes");
         return ticketRepository.save(ticket);
     }
 
@@ -51,10 +68,16 @@ public class TicketService {
         return  ticketRepository.findTicketByPassenger(id);
     }
 
-
-
     public  List<Ticket>    getTicketByLoginUser(Long id){
 
         return  ticketRepository.findTicketByLoginUser(id);
     }
+
+    public Ticket viewCart(String email,String lastName, String numberTicket ){
+        return ticketRepository.findTicketByOriginAndNumberTicketAndLastName(email,lastName,numberTicket);
+    }
+
+
+
+
 }

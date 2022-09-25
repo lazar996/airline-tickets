@@ -8,15 +8,17 @@ public class TicketDTO {
     private Long passenger_id;
     private Long flight_id;
 
+    private Long user_id;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Long id, String checkIn, Long passenger_id, Long flight_id) {
+    public TicketDTO(Long id, String checkIn, Long passenger_id, Long flight_id, Long user_id) {
         this.id = id;
         CheckIn = checkIn;
         this.passenger_id = passenger_id;
         this.flight_id = flight_id;
+        this.user_id = user_id;
     }
 
     public Long getId() {
@@ -49,5 +51,13 @@ public class TicketDTO {
 
     public void setFlight_id(Long flight_id) {
         this.flight_id = flight_id;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }
