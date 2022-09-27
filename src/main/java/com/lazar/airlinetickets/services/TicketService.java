@@ -49,6 +49,7 @@ public class TicketService {
         ticket.setFlight(flight);
         ticket.setPassenger(passenger);
         ticket.setUser(user);
+        ticket.setNumberTicket(ticketDTO.getNumber_ticket());
         System.out.println(flight);
         return ticketRepository.save(ticket);
     }

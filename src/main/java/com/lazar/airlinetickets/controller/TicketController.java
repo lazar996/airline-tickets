@@ -44,7 +44,7 @@ public class TicketController {
     @PostMapping("/reserve")
     public ResponseEntity<Ticket> createTicket(@RequestBody TicketDTO ticketDTO){
 
-
+        System.out.println(ticketDTO);
         return new ResponseEntity<Ticket>(this.ticketService.createTicket(ticketDTO),HttpStatus.CREATED);
     }
 
